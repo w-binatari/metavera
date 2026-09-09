@@ -11,17 +11,38 @@ const testimonials = (await getCollection('testimonials')).sort((a, b) => a.data
 const formEndpoint = site.formEndpoint || '#';
 ---
 
-<BaseLayout title={`${site.name} — ${site.tagline}`} activeNav="home">
+<BaseLayout
+  title={`${site.name} — ${site.tagline}`}
+  activeNav="home"
+  preloadImage="/images/metavera_hero-1280.webp"
+  preloadImageType="image/webp"
+  ogImage="/images/metavera_hero-1280.jpg"
+>
   <section class="hero" id="hero">
     <div class="hero__bg">
-      <img
-        src="/images/metavera_hero.jpg"
-        alt="Modern Nigerian real estate skyline"
-        width="1200"
-        height="800"
-        fetchpriority="high"
-        loading="eager"
-      />
+      <picture>
+        <source
+          type="image/avif"
+          srcset="/images/metavera_hero-800.avif 800w, /images/metavera_hero-1280.avif 1280w, /images/metavera_hero-1920.avif 1920w"
+          sizes="100vw"
+        />
+        <source
+          type="image/webp"
+          srcset="/images/metavera_hero-800.webp 800w, /images/metavera_hero-1280.webp 1280w, /images/metavera_hero-1920.webp 1920w"
+          sizes="100vw"
+        />
+        <img
+          src="/images/metavera_hero-1280.jpg"
+          srcset="/images/metavera_hero-800.jpg 800w, /images/metavera_hero-1280.jpg 1280w, /images/metavera_hero-1920.jpg 1920w"
+          sizes="100vw"
+          alt="Modern Nigerian real estate skyline"
+          width="1280"
+          height="853"
+          fetchpriority="high"
+          decoding="async"
+          loading="eager"
+        />
+      </picture>
     </div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
