@@ -1,0 +1,46 @@
+---
+import { badgeClass, projectHref } from '../lib/projects';
+
+interface Props {
+  id: string;
+  title: string;
+  location: string;
+  price: string;
+  image: string;
+  status: string;
+  statusLabel: string;
+  type: string;
+  delay?: number;
+}
+
+const { id, title, location, price, image, status, statusLabel, type, delay = 0 } = Astro.props;
+const badge = type === 'land' && status === 'available' ? 'badge badge--land' : badgeClass(status);
+---
+
+<article
+  class:list={['project-card', 'reveal', delay ? `reveal-delay-${delay}` : '']}
+  data-type={type}
+  data-status={status}
+>
+  <a href={projectHref(id)} class="project-card__link">
+    <div class="project-card__img-wrap">
+      <img src={image} alt={title} loading="lazy" width="736" height="520" />
+      <div class="project-card__badge">
+        <span class={badge}>{statusLabel}</span>
+      </div>
+      <div class="project-card__overlay">
+        <span class="project-card__cta">View Details →</span>
+      </div>
+    </div>
+    <div class="project-card__body">
+      <p class="project-card__location">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true"
+          ><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg
+        >
+        {location}
+      </p>
+      <h3 class="project-card__name">{title}</h3>
+      <p class="project-card__price">{price}</p>
+    </div>
+  </a>
+</article>

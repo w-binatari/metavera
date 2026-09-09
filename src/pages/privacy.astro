@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../lib/site';
+---
+
+<BaseLayout
+  title={`Privacy Policy — ${site.name}`}
+  description={`Privacy Policy for ${site.name}.`}
+  navSolid
+  activeNav="contact"
+>
+  <PageHero eyebrow="Legal" title="Privacy Policy" description="How Metavera Ltd handles personal information collected through this website." />
+  <section class="section">
+    <div class="container legal-content">
+      <p class="text-muted">Last updated: September 2026</p>
+      <h2>Information we collect</h2>
+      <p>
+        When you submit a contact, inspection, or interest form, we collect the details you provide — such as name, phone number, email,
+        property of interest, and message content.
+      </p>
+      <h2>How we use information</h2>
+      <p>
+        We use this information to respond to inquiries, schedule inspections, share project details, and improve our services. We do not
+        sell your personal data.
+      </p>
+      <h2>Sharing</h2>
+      <p>
+        Information may be shared with trusted service providers who help us operate the website or process enquiries (for example email
+        or form delivery tools), solely for those purposes.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        For privacy questions, email <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p class="legal-note">
+        This page is a starter policy for launch readiness. Replace with counsel-reviewed terms before public marketing campaigns.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

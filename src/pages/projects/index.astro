@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const filters = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'residential', label: 'Residential' },
+  { id: 'commercial', label: 'Commercial' },
+  { id: 'land', label: 'Land' },
+  { id: 'completed', label: 'Completed' },
+  { id: 'construction', label: 'Under Construction' },
+];
+---
+
+<BaseLayout
+  title="Projects — Metavera Ltd | Premium Nigerian Real Estate"
+  description="Browse Metavera's portfolio of residential, commercial, and land projects across Nigeria. Filter by type, status, and location."
+  navSolid
+  activeNav="projects"
+>
+  <PageHero
+    eyebrow="Our Portfolio"
+    title="Explore Our Projects"
+    description="Residential estates, commercial hubs, and serviced land plots across Nigeria's key cities."
+  />
+
+  <section class="section" id="projects-listing">
+    <div class="container">
+      <div class="filter-tabs" id="filterTabs" role="tablist" aria-label="Filter projects">
+        {
+          filters.map((f, i) => (
+            <button
+              type="button"
+              class:list={['filter-tab', { active: i === 0 }]}
+              data-filter={f.id}
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+              id={`filter-${f.id}`}
+            >
+              {f.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        {
+          projects.map((project, i) => (
+            <ProjectCard
+              id={project.id}
+              title={project.data.title}
+              location={project.data.location}
+              price={project.data.price}
+              image={project.data.image}
+              status={project.data.status}
+              statusLabel={project.data.statusLabel}
+              type={project.data.type}
+              delay={i % 3}
+            />
+          ))
+        }
+      </div>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <h3 class="empty-state__title">No projects in this category yet</h3>
+        <p class="empty-state__text">
+          Check back soon or <a href="/contact">contact us</a> for off-market listings.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <p class="cta-banner__eyebrow">Ready to Invest?</p>
+      <h2 class="cta-banner__title">Talk to Our Property Advisors</h2>
+      <p class="cta-banner__desc">
+        Not sure which property fits your budget or goals? Our team will help you navigate the options — at no charge.
+      </p>
+      <a href="/contact" class="btn btn--primary">Get Free Consultation</a>
+    </div>
+  </section>
+</BaseLayout>

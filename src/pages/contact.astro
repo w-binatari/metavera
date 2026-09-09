@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { getCollection } from 'astro:content';
+import { site, whatsappUrl } from '../lib/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const formEndpoint = site.formEndpoint || '#';
+const socialLinks = [
+  { label: 'Instagram', href: site.social.instagram },
+  { label: 'Facebook', href: site.social.facebook },
+  { label: 'Twitter / X', href: site.social.twitter },
+].filter((s) => s.href);
+---
+
+<BaseLayout
+  title="Contact Us — Metavera Ltd | Get in Touch"
+  description="Contact Metavera Ltd to inquire about properties, schedule a site inspection, or speak with our property advisors. Lagos and Abuja offices."
+  navSolid
+  activeNav="contact"
+>
+  <PageHero
+    eyebrow="Get in Touch"
+    title="We'd Love to Hear From You"
+    description="Whether you have a question, want to arrange a site visit, or are ready to invest — our team is standing by."
+  />
+
+  <section class="section" id="contact-main">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="section-header__eyebrow">Our Offices</p>
+          <h2 class="contact-heading reveal">Find Us or Reach Out</h2>
+          <div class="divider"></div>
+          <p class="text-muted reveal contact-intro">
+            We maintain offices in Lagos and Abuja. You can also reach us by phone, email, or WhatsApp — whichever works best for you.
+            We respond to all inquiries within 24 hours.
+          </p>
+
+          <div class="contact-info__item reveal">
+            <div class="contact-info__icon-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg
+              >
+            </div>
+            <div>
+              <div class="contact-info__title">Lagos Office (Head Office)</div>
+              <div class="contact-info__text">{site.address.lagos}</div>
+            </div>
+          </div>
+
+          <div class="contact-info__item reveal">
+            <div class="contact-info__icon-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg
+              >
+            </div>
+            <div>
+              <div class="contact-info__title">Abuja Office</div>
+              <div class="contact-info__text">{site.address.abuja}</div>
+            </div>
+          </div>
+
+          <div class="contact-info__item reveal">
+            <div class="contact-info__icon-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.09a16 16 0 0 0 8 8l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 24 17z"
+                ></path></svg
+              >
+            </div>
+            <div>
+              <div class="contact-info__title">Phone / WhatsApp</div>
+              <div class="contact-info__text">
+                <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a><br />
+                {site.phoneSecondary}
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info__item reveal">
+            <div class="contact-info__icon-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline
+                  points="22,6 12,13 2,6"></polyline></svg
+              >
+            </div>
+            <div>
+              <div class="contact-info__title">Email</div>
+              <div class="contact-info__text">
+                <a href={`mailto:${site.email}`}>{site.email}</a><br />
+                <a href={`mailto:${site.salesEmail}`}>{site.salesEmail}</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info__item reveal">
+            <div class="contact-info__icon-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg
+              >
+            </div>
+            <div>
+              <div class="contact-info__title">Office Hours</div>
+              <div class="contact-info__text">
+                {site.hours.weekdays}<br />
+                {site.hours.saturday}
+              </div>
+            </div>
+          </div>
+
+          <div class="map-lazy reveal" data-map-src={site.mapEmbed}>
+            <button type="button" class="map-lazy__btn" id="loadMapBtn">Load map</button>
+            <iframe class="map-embed" title="Metavera office location" loading="lazy" hidden></iframe>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <div class="contact-form-card">
+            <p class="contact-form-card__eyebrow">Send a Message</p>
+            <h3 class="contact-form-card__title">How Can We Help?</h3>
+            <p class="contact-form-card__desc">Fill in your details and our team will respond within 24 hours.</p>
+
+            <form class="form" id="contactForm" data-lead-form data-endpoint={formEndpoint} action={formEndpoint} method="POST">
+              <input type="hidden" name="formType" value="contact" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="ct-first">First Name *</label>
+                  <input type="text" id="ct-first" name="firstName" class="form-input" placeholder="First name" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ct-last">Last Name *</label>
+                  <input type="text" id="ct-last" name="lastName" class="form-input" placeholder="Last name" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ct-email">Email Address *</label>
+                <input type="email" id="ct-email" name="email" class="form-input" placeholder="your@email.com" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ct-phone">Phone Number</label>
+                <input type="tel" id="ct-phone" name="phone" class="form-input" placeholder="+234 ..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ct-subject">Subject</label>
+                <select id="ct-subject" name="subject" class="form-select">
+                  <option>Property Inquiry</option>
+                  <option>Book a Site Inspection</option>
+                  <option>Investment Consultation</option>
+                  <option>Payment Plan Question</option>
+                  <option>General Inquiry</option>
+                  <option>Diaspora Investment</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ct-property">Property of Interest</label>
+                <select id="ct-property" name="property" class="form-select">
+                  <option value="">Select if applicable...</option>
+                  {projects.map((p) => <option value={p.data.title}>{p.data.title}</option>)}
+                  <option value="Not sure — show me options">Not sure — show me options</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ct-message">Your Message *</label>
+                <textarea
+                  id="ct-message"
+                  name="message"
+                  class="form-textarea"
+                  placeholder="Tell us more about what you're looking for..."
+                  required></textarea>
+              </div>
+              <button type="submit" class="btn btn--dark form-submit">Send Message →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" id="social-section">
+    <div class="container">
+      <p class="cta-banner__eyebrow">Follow Our Journey</p>
+      <h2 class="cta-banner__title">Stay Connected With Metavera</h2>
+      <p class="cta-banner__desc">Get property updates, project launches, and real estate tips straight to your feed.</p>
+      <div class="social-cta-row">
+        {
+          socialLinks.map((s) => (
+            <a href={s.href} class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+              {s.label}
+            </a>
+          ))
+        }
+        <a href={whatsappUrl()} class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const wrap = document.querySelector('.map-lazy');
+  const btn = document.getElementById('loadMapBtn');
+  const iframe = wrap?.querySelector('iframe');
+  btn?.addEventListener('click', () => {
+    if (!wrap || !iframe) return;
+    iframe.src = wrap.getAttribute('data-map-src') || '';
+    iframe.hidden = false;
+    btn.hidden = true;
+  });
+</script>

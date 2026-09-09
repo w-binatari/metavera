@@ -1,0 +1,18 @@
+{
+  "rewrites": [
+    { "source": "/index.html", "destination": "/" },
+    { "source": "/projects.html", "destination": "/projects" },
+    { "source": "/about.html", "destination": "/about" },
+    { "source": "/contact.html", "destination": "/contact" },
+    { "source": "/project-detail.html", "destination": "/projects/emerald-court" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

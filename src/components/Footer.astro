@@ -1,0 +1,82 @@
+---
+import { site } from '../lib/site';
+
+const year = new Date().getFullYear();
+const social = [
+  { key: 'instagram', label: 'Instagram', href: site.social.instagram },
+  { key: 'twitter', label: 'Twitter/X', href: site.social.twitter },
+  { key: 'linkedin', label: 'LinkedIn', href: site.social.linkedin },
+  { key: 'facebook', label: 'Facebook', href: site.social.facebook },
+].filter((s) => s.href);
+---
+
+<footer class="footer" id="main-footer">
+  <div class="footer__top">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand-logo">
+          <img src="/Metavera_logo.png" alt="" width="44" height="30" class="nav__logo-img" />
+          {site.name}
+        </div>
+        <p class="footer__brand-text">
+          Building Nigeria's property future with integrity, quality, and vision. Your dream property is closer than you think.
+        </p>
+        {
+          social.length > 0 && (
+            <div class="footer__social">
+              {social.map((s) => (
+                <a href={s.href} class="footer__social-link" aria-label={s.label} target="_blank" rel="noopener noreferrer">
+                  {s.label.slice(0, 1)}
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+      <div>
+        <div class="footer__col-title">Quick Links</div>
+        <ul class="footer__links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/contact">Book Inspection</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Project Types</div>
+        <ul class="footer__links">
+          <li><a href="/projects?filter=residential">Residential</a></li>
+          <li><a href="/projects?filter=commercial">Commercial</a></li>
+          <li><a href="/projects?filter=land">Land Plots</a></li>
+          <li><a href="/projects?filter=completed">Completed</a></li>
+          <li><a href="/projects?filter=construction">Under Construction</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact Us</div>
+        <div class="footer__contact-item">
+          <svg class="footer__contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>{site.address.lagos}</span>
+        </div>
+        <div class="footer__contact-item">
+          <svg class="footer__contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.09a16 16 0 0 0 8 8l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 24 17z"/></svg>
+          <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+        </div>
+        <div class="footer__contact-item">
+          <svg class="footer__contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__bottom-inner">
+      <span>© {year} {site.name}. All rights reserved.</span>
+      <div class="footer__bottom-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>

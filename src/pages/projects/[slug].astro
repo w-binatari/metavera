@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { badgeClass } from '../../lib/projects';
+import { site } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const related = all.filter((p) => p.id !== project.id).slice(0, 3);
+const formEndpoint = site.formEndpoint || '#';
+const gallery = data.gallery.length ? data.gallery : [data.image];
+const mapSrc = data.mapEmbed || site.mapEmbed;
+const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--type';
+---
+
+<BaseLayout
+  title={data.seoTitle || `${data.title} — Metavera Ltd`}
+  description={data.seoDescription || data.excerpt}
+  ogImage={data.image}
+  navSolid
+  activeNav="projects"
+>
+  <div class="project-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/projects">Projects</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">{data.shortName || data.title}</span>
+      </nav>
+      <div class="project-gallery">
+        <div class="project-gallery__main">
+          <img src={gallery[0]} alt={`${data.title} main view`} width="900" height="600" fetchpriority="high" />
+        </div>
+        {
+          gallery[1] && (
+            <div class="project-gallery__thumb">
+              <img src={gallery[1]} alt={`${data.title} detail`} loading="lazy" width="450" height="300" />
+            </div>
+          )
+        }
+        {
+          gallery[2] && (
+            <div class="project-gallery__thumb">
+              <img src={gallery[2]} alt={`${data.title} amenity`} loading="lazy" width="450" height="300" />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="project-detail">
+    <div class="container">
+      <div class="project-detail__grid">
+        <div>
+          <div class="project-detail__badges">
+            <span class={badgeClass(data.status)}>{data.statusLabel}</span>
+            <span class={typeBadge}>{data.type.charAt(0).toUpperCase() + data.type.slice(1)}</span>
+          </div>
+          <h1 class="project-detail__title reveal">{data.title}</h1>
+          <p class="project-detail__location reveal">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true"
+              ><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg
+            >
+            {data.address || data.location}
+          </p>
+
+          <h2 class="project-detail__h2 reveal">About This Development</h2>
+          <div class="divider"></div>
+          <p class="text-muted reveal project-detail__copy">{data.description}</p>
+
+          {
+            data.specs.length > 0 && (
+              <>
+                <h3 class="project-detail__h3 reveal">Specifications</h3>
+                <div class="divider"></div>
+                <div class="reveal">
+                  {data.specs.map((spec) => (
+                    <div class="spec-row">
+                      <span class="spec-row__label">{spec.label}</span>
+                      <span class="spec-row__val">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )
+          }
+
+          {
+            data.amenities.length > 0 && (
+              <>
+                <h3 class="project-detail__h3 project-detail__h3--spaced reveal">Amenities & Features</h3>
+                <div class="divider"></div>
+                <div class="amenities-grid reveal">
+                  {data.amenities.map((item) => (
+                    <div class="amenity-item">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )
+          }
+
+          <h3 class="project-detail__h3 project-detail__h3--spaced reveal">Location</h3>
+          <div class="map-lazy reveal" data-map-src={mapSrc}>
+            <button type="button" class="map-lazy__btn" id="loadMapBtn">Load map</button>
+            <iframe class="map-embed" title={`${data.title} location map`} loading="lazy" hidden></iframe>
+          </div>
+        </div>
+
+        <div>
+          <div class="interest-card reveal">
+            <p class="interest-card__eyebrow">Express Interest</p>
+            <h3 class="interest-card__title">Secure Your Unit</h3>
+            <p class="interest-card__desc">
+              Fill in your details and our team will reach out within 24 hours with pricing, floor plans, and availability.
+            </p>
+            <form class="form" id="interestForm" data-lead-form data-endpoint={formEndpoint} action={formEndpoint} method="POST">
+              <input type="hidden" name="formType" value="interest" />
+              <input type="hidden" name="project" value={data.title} />
+              <div class="form-group">
+                <label class="form-label" for="int-name">Full Name *</label>
+                <input type="text" id="int-name" name="name" class="form-input" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="int-phone">Phone *</label>
+                <input type="tel" id="int-phone" name="phone" class="form-input" placeholder="Your phone number" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="int-email">Email</label>
+                <input type="email" id="int-email" name="email" class="form-input" placeholder="your@email.com" />
+              </div>
+              {
+                data.unitOptions.length > 0 && (
+                  <div class="form-group">
+                    <label class="form-label" for="int-type">Unit Type</label>
+                    <select id="int-type" name="unitType" class="form-select">
+                      {data.unitOptions.map((opt) => (
+                        <option>{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+                )
+              }
+              <div class="form-group">
+                <label class="form-label" for="int-msg">Additional Notes</label>
+                <textarea id="int-msg" name="message" class="form-textarea form-textarea--sm" placeholder="Payment preference, timeline, questions..."
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary form-submit form-submit--full">Submit Interest →</button>
+            </form>
+            <div class="interest-card__call">
+              <p>Or speak to us directly</p>
+              <a href={`tel:${site.phoneTel}`} class="btn btn--ghost form-submit--full">Call Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="section section--muted" id="more-projects">
+        <div class="container">
+          <div class="section-header text-center section-header--center reveal">
+            <p class="section-header__eyebrow">More From Metavera</p>
+            <h2 class="section-header__title">Other Projects You May Like</h2>
+            <div class="divider divider--center"></div>
+          </div>
+          <div class="projects-grid">
+            {related.map((p, i) => (
+              <ProjectCard
+                id={p.id}
+                title={p.data.title}
+                location={p.data.location}
+                price={p.data.price}
+                image={p.data.image}
+                status={p.data.status}
+                statusLabel={p.data.statusLabel}
+                type={p.data.type}
+                delay={i}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<script>
+  const wrap = document.querySelector('.map-lazy');
+  const btn = document.getElementById('loadMapBtn');
+  const iframe = wrap?.querySelector('iframe');
+  btn?.addEventListener('click', () => {
+    if (!wrap || !iframe) return;
+    iframe.src = wrap.getAttribute('data-map-src') || '';
+    iframe.hidden = false;
+    btn.hidden = true;
+  });
+</script>

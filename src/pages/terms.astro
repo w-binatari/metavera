@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../lib/site';
+---
+
+<BaseLayout
+  title={`Terms of Use — ${site.name}`}
+  description={`Terms of Use for ${site.name}.`}
+  navSolid
+  activeNav="contact"
+>
+  <PageHero eyebrow="Legal" title="Terms of Use" description="Terms governing use of the Metavera Ltd website." />
+  <section class="section">
+    <div class="container legal-content">
+      <p class="text-muted">Last updated: September 2026</p>
+      <h2>Website use</h2>
+      <p>
+        Content on this site is for general information about Metavera projects and services. Property availability, pricing, and
+        specifications may change without notice.
+      </p>
+      <h2>No offer</h2>
+      <p>
+        Nothing on this website constitutes a binding offer to sell property. Transactions are subject to contract, due diligence, and
+        applicable Nigerian law.
+      </p>
+      <h2>Accuracy</h2>
+      <p>
+        We aim to keep information accurate, but we do not warrant completeness or fitness for a particular purpose. Always confirm
+        details with our team before making decisions.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms: <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p class="legal-note">
+        This page is a starter policy for launch readiness. Replace with counsel-reviewed terms before public marketing campaigns.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

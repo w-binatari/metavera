@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { site } from '../lib/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalPath?: string;
+  navSolid?: boolean;
+  activeNav?: 'home' | 'projects' | 'about' | 'contact';
+}
+
+const {
+  title,
+  description = site.description,
+  ogImage = '/images/metavera_hero.jpg',
+  canonicalPath = Astro.url.pathname,
+  navSolid = false,
+  activeNav,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath === '/' ? '' : canonicalPath, site.url).href;
+const absoluteOg = new URL(ogImage, site.url).href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteOg} />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOg} />
+    <meta name="theme-color" content="#031633" />
+    <link rel="icon" type="image/png" href="/Metavera_logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Nav solid={navSolid} active={activeNav} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+    <script src="/scripts/main.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+interface Stat {
+  value: number | string;
+  label: string;
+  suffix?: string;
+}
+
+interface Props {
+  stats: readonly Stat[];
+  animate?: boolean;
+}
+
+const { stats, animate = false } = Astro.props;
+---
+
+<div class="stats-bar">
+  <div class="stats-bar__grid">
+    {
+      stats.map((stat, i) => (
+        <div class:list={['stats-bar__item', 'reveal', i ? `reveal-delay-${Math.min(i, 3)}` : '']}>
+          {animate && typeof stat.value === 'number' ? (
+            <div class="stats-bar__number" data-count={stat.value} data-suffix={stat.suffix ?? ''}>
+              0
+            </div>
+          ) : (
+            <div class="stats-bar__number">{stat.value}{stat.suffix ?? ''}</div>
+          )}
+          <div class="stats-bar__label">{stat.label}</div>
+        </div>
+      ))
+    }
+  </div>
+</div>

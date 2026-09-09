@@ -1,0 +1,62 @@
+---
+import { site } from '../lib/site';
+
+interface Props {
+  solid?: boolean;
+  active?: 'home' | 'projects' | 'about' | 'contact';
+}
+
+const { solid = false, active } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Home', key: 'home' as const },
+  { href: '/projects', label: 'Projects', key: 'projects' as const },
+  { href: '/about', label: 'About', key: 'about' as const },
+  { href: '/contact', label: 'Contact', key: 'contact' as const },
+];
+---
+
+<nav class:list={['nav', { scrolled: solid }]} id="mainNav" data-nav-solid={solid ? 'true' : 'false'}>
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">
+      <img src="/Metavera_logo.png" alt="" width="44" height="30" class="nav__logo-img" />
+      <span>{site.shortName}</span>
+    </a>
+    <ul class="nav__links">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class:list={[{ active: active === link.key }]} aria-current={active === link.key ? 'page' : undefined}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="nav__actions">
+      <a href="/contact" class="btn btn--primary nav__cta">Book Inspection</a>
+      <button
+        class="nav__hamburger"
+        id="hamburgerBtn"
+        type="button"
+        aria-label="Open menu"
+        aria-controls="mobileNav"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="mobileNav" hidden aria-hidden="true">
+  <button class="nav__mobile-close" id="mobileNavClose" type="button" aria-label="Close menu">✕</button>
+  {
+    links.map((link) => (
+      <a href={link.href} class:list={[{ active: active === link.key }]}>
+        {link.label}
+      </a>
+    ))
+  }
+  <a href="/contact" class="btn btn--primary nav__mobile-cta">Book Inspection</a>
+</div>
