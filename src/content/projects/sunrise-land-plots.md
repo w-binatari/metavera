@@ -29,6 +29,6 @@ unitOptions:
   - Single Plot
   - Multiple Plots
   - Not Sure — Advise Me
-seoTitle: Sunrise Land Plots — Metavera Ltd
+seoTitle: Sunrise Land Plots — Metavera Investment Limited
 seoDescription: Sunrise Land Plots in Epe, Lagos — serviced plots from ₦12,000,000. Book a site inspection with Metavera.
 ---

@@ -7,39 +7,6 @@ import { site } from '../lib/site';
 
 const team = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
 
-const values = [
-  {
-    num: '01',
-    title: 'Integrity First',
-    text: 'We say what we mean and do what we say. Every title is clean, every timeline is honest, and every contract is fair. Our reputation is more valuable than any single deal.',
-  },
-  {
-    num: '02',
-    title: 'Excellence in Craft',
-    text: 'We hold ourselves and our contractors to an uncompromising standard. Good enough is never good enough at Metavera — we build to last decades, not to look good in photos.',
-  },
-  {
-    num: '03',
-    title: 'Client-Centred Always',
-    text: 'Your investment is personal. We treat it that way. Every client — whether buying a ₦12M plot or a ₦250M penthouse — receives dedicated, personalised attention.',
-  },
-  {
-    num: '04',
-    title: 'Community Impact',
-    text: "We don't just build buildings — we build neighbourhoods. Every Metavera project is designed to contribute positively to its surrounding community through landscaping, local hiring, and civic infrastructure.",
-  },
-  {
-    num: '05',
-    title: 'Innovation & Adaptation',
-    text: 'The real estate landscape evolves — and so do we. From diaspora payment plans to smart-home integrations, we continuously evolve our offering to match the needs of modern Nigerians.',
-  },
-  {
-    num: '06',
-    title: 'Long-Term Thinking',
-    text: 'We build for the next 30 years, not the next quarter. Every Metavera property is designed with appreciation and longevity in mind — for our clients and the communities they join.',
-  },
-];
-
 const accentClass: Record<string, string> = {
   navy: '',
   blue: 'team-card__photo--blue',
@@ -49,35 +16,35 @@ const accentClass: Record<string, string> = {
 ---
 
 <BaseLayout
-  title="About Us — Metavera Ltd | Our Story, Vision & Team"
-  description="Learn about Metavera Ltd — our founding story, mission, vision, core values, and the experienced team building Nigeria's real estate future."
+  title={`About Us — ${site.name} | Vision, Mission & Core Values`}
+  description={`Learn about ${site.name} — our vision, mission, core values, and the team delivering sustainable land and housing across Nigeria.`}
   navSolid
   activeNav="about"
 >
   <PageHero
     eyebrow="Our Story"
     title="Built on Purpose, Driven by People"
-    description="Discover the people, principles, and passion behind Nigeria's most trusted real estate brand."
+    description="Redefining modern urban living through sustainable infrastructure, value-driven properties, and architectural excellence."
   />
 
   <section class="section" id="founding-story">
     <div class="container">
       <div class="about-snippet__grid">
         <div class="reveal">
-          <p class="about-snippet__tag">Our Founding</p>
-          <h2 class="about-snippet__heading">Started With a Simple Question: Why Should Quality Housing Be Rare?</h2>
+          <p class="about-snippet__tag">Who We Are</p>
+          <h2 class="about-snippet__heading">Redefining Modern Urban Living Across Strategic Growth Corridors</h2>
           <div class="divider"></div>
           <p class="body-lg text-muted about-snippet__p">
-            Metavera Ltd was founded in 2016 by a group of Nigerian property professionals who had spent years watching clients get
-            shortchanged — by unclear titles, poor construction quality, and developers who disappeared after the cheque cleared.
+            {site.name} is a real estate company dedicated to delivering exceptional real estate assets and sustainable land and
+            housing opportunities across strategic growth corridors and partnerships in Nigeria.
           </p>
           <p class="text-muted about-snippet__p">
-            We set out to build something different. A company anchored in radical transparency: clear documentation, honest timelines,
-            and homes that look better after handover than the brochure promised.
+            We combine disciplined project delivery, verified documentation, and architectural excellence to create lasting value for
+            homeowners, investors, and communities.
           </p>
           <p class="text-muted">
-            Today, Metavera has delivered over 38 projects across Lagos, Abuja, Enugu, Port Harcourt, and beyond — each one a statement
-            that quality and affordability are not opposites.
+            With our Head Office in Abuja and Branch Office in Port Harcourt, we serve clients across Nigeria and the diaspora with
+            professionalism, transparency, and investor alignment.
           </p>
         </div>
         <div class="about-snippet__img reveal reveal-delay-2">
@@ -91,20 +58,14 @@ const accentClass: Record<string, string> = {
     <div class="container">
       <div class="about-mv-grid">
         <div class="reveal">
-          <p class="mission-vision__eyebrow">Our Mission</p>
-          <h2 class="mission-vision__title">To democratise access to quality real estate for every Nigerian.</h2>
-          <p class="mission-vision__text">
-            We exist to break the myth that premium property is only for the ultra-wealthy — delivering verified, quality-built homes
-            across a range of budgets, backed by world-class service from first contact to key collection.
-          </p>
+          <p class="mission-vision__eyebrow">Vision Statement</p>
+          <h2 class="mission-vision__title">West Africa’s Most Trusted Real Estate Company</h2>
+          <p class="mission-vision__text">{site.vision}</p>
         </div>
         <div class="reveal reveal-delay-2">
-          <p class="mission-vision__eyebrow">Our Vision</p>
-          <h2 class="mission-vision__title">To be Nigeria's most respected real estate brand by 2030.</h2>
-          <p class="mission-vision__text">
-            Not the largest, not the loudest — the most respected. We will earn this through consistent delivery, transparent business
-            practices, and a genuine commitment to the communities we build in.
-          </p>
+          <p class="mission-vision__eyebrow">Mission Statement</p>
+          <h2 class="mission-vision__title">Exceptional Assets Across Strategic Growth Corridors</h2>
+          <p class="mission-vision__text">{site.mission}</p>
         </div>
       </div>
     </div>
@@ -116,10 +77,11 @@ const accentClass: Record<string, string> = {
         <p class="section-header__eyebrow">What We Stand For</p>
         <h2 class="section-header__title">Our Core Values</h2>
         <div class="divider divider--center"></div>
+        <p class="section-header__desc section-header__desc--wide">{site.coreValuesStatement}</p>
       </div>
-      <div class="values-grid">
+      <div class="values-grid values-grid--ten">
         {
-          values.map((v, i) => (
+          site.coreValues.map((v, i) => (
             <div class:list={['value-card', 'reveal', i % 3 ? `reveal-delay-${i % 3}` : '']}>
               <div class="value-card__num">{v.num}</div>
               <h3 class="value-card__title">{v.title}</h3>

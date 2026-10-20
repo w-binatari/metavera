@@ -49,7 +49,7 @@ const formEndpoint = site.formEndpoint || '#';
       <p class="hero__eyebrow">Premium Real Estate · Nigeria</p>
       <h1 class="hero__headline">Your Dream Property, <em>Delivered.</em></h1>
       <p class="hero__sub">
-        Metavera Ltd crafts residential and commercial spaces that stand the test of time — across Lagos, Abuja, and beyond.
+        {site.mission}
       </p>
       <div class="hero__ctas">
         <a href="/projects" class="btn btn--primary">Explore Properties</a>
@@ -98,15 +98,13 @@ const formEndpoint = site.formEndpoint || '#';
       <div class="about-snippet__grid">
         <div class="reveal">
           <p class="about-snippet__tag">Who We Are</p>
-          <h2 class="about-snippet__heading">Building Nigeria's Property Landscape — One Estate at a Time</h2>
+          <h2 class="about-snippet__heading">Redefining Modern Urban Living Across West Africa</h2>
           <div class="divider"></div>
           <p class="body-lg text-muted about-snippet__p">
-            Metavera Ltd was founded on a single conviction: that every Nigerian deserves access to quality, trustworthy real estate.
-            We combine deep local expertise with international design standards to deliver properties that exceed expectations.
+            {site.vision}
           </p>
           <p class="text-muted about-snippet__p about-snippet__p--last">
-            From first-time homebuyers to seasoned investors, we provide transparent, end-to-end support — from site selection to key
-            handover.
+            {site.coreValuesStatement}
           </p>
           <a href="/about" class="btn btn--dark">Learn More About Us</a>
           <div class="about-snippet__value">

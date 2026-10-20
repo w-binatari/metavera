@@ -25,6 +25,6 @@ amenities:
   - Parking
   - Backup Power
 unitOptions: []
-seoTitle: Greenview Terrace — Metavera Ltd
+seoTitle: Greenview Terrace — Metavera Investment Limited
 seoDescription: Greenview Terrace in Jabi, Abuja — a completed Metavera residential project (sold out).
 ---

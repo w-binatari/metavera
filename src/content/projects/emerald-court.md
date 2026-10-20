@@ -38,6 +38,6 @@ unitOptions:
   - 2-Bedroom (from ₦85M)
   - 3-Bedroom (from ₦120M)
   - Not Sure — Advise Me
-seoTitle: Emerald Court Apartments — Metavera Ltd
+seoTitle: Emerald Court Apartments — Metavera Investment Limited
 seoDescription: Discover Emerald Court Apartments in Lekki Phase 1, Lagos. Premium 2 and 3-bedroom apartments with top-tier amenities. Available now.
 ---

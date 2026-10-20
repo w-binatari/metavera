@@ -28,6 +28,6 @@ unitOptions:
   - Retail Unit
   - Office Floor
   - Not Sure — Advise Me
-seoTitle: Marina Trade Centre — Metavera Ltd
+seoTitle: Marina Trade Centre — Metavera Investment Limited
 seoDescription: Marina Trade Centre in Lagos — commercial spaces under construction. Contact Metavera for details.
 ---

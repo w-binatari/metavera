@@ -24,7 +24,7 @@ const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--typ
 ---
 
 <BaseLayout
-  title={data.seoTitle || `${data.title} — Metavera Ltd`}
+  title={data.seoTitle || `${data.title} — ${site.name}`}
   description={data.seoDescription || data.excerpt}
   ogImage={data.image}
   navSolid

@@ -14,8 +14,8 @@ const socialLinks = [
 ---
 
 <BaseLayout
-  title="Contact Us — Metavera Ltd | Get in Touch"
-  description="Contact Metavera Ltd to inquire about properties, schedule a site inspection, or speak with our property advisors. Lagos and Abuja offices."
+  title={`Contact Us — ${site.name} | Get in Touch`}
+  description={`Contact ${site.name} to inquire about properties, schedule a site inspection, or speak with our advisors at our Abuja Head Office or Port Harcourt Branch Office.`}
   navSolid
   activeNav="contact"
 >
@@ -33,8 +33,8 @@ const socialLinks = [
           <h2 class="contact-heading reveal">Find Us or Reach Out</h2>
           <div class="divider"></div>
           <p class="text-muted reveal contact-intro">
-            We maintain offices in Lagos and Abuja. You can also reach us by phone, email, or WhatsApp — whichever works best for you.
-            We respond to all inquiries within 24 hours.
+            Visit our Head Office in Abuja or our Branch Office in Port Harcourt. You can also reach us by phone, email, or WhatsApp —
+            whichever works best for you. We respond to all inquiries within 24 hours.
           </p>
 
           <div class="contact-info__item reveal">
@@ -44,8 +44,8 @@ const socialLinks = [
               >
             </div>
             <div>
-              <div class="contact-info__title">Lagos Office (Head Office)</div>
-              <div class="contact-info__text">{site.address.lagos}</div>
+              <div class="contact-info__title">{site.address.headOffice.label}</div>
+              <div class="contact-info__text">{site.address.headOffice.line}</div>
             </div>
           </div>
 
@@ -56,8 +56,8 @@ const socialLinks = [
               >
             </div>
             <div>
-              <div class="contact-info__title">Abuja Office</div>
-              <div class="contact-info__text">{site.address.abuja}</div>
+              <div class="contact-info__title">{site.address.branchOffice.label}</div>
+              <div class="contact-info__text">{site.address.branchOffice.line}</div>
             </div>
           </div>
 
@@ -72,8 +72,14 @@ const socialLinks = [
             <div>
               <div class="contact-info__title">Phone / WhatsApp</div>
               <div class="contact-info__text">
-                <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a><br />
-                {site.phoneSecondary}
+                {
+                  site.phones.map((p, idx) => (
+                    <>
+                      <a href={`tel:${p.tel}`}>{p.display}</a>
+                      {idx < site.phones.length - 1 && <br />}
+                    </>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -88,8 +94,7 @@ const socialLinks = [
             <div>
               <div class="contact-info__title">Email</div>
               <div class="contact-info__text">
-                <a href={`mailto:${site.email}`}>{site.email}</a><br />
-                <a href={`mailto:${site.salesEmail}`}>{site.salesEmail}</a>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
               </div>
             </div>
           </div>
@@ -111,7 +116,7 @@ const socialLinks = [
 
           <div class="map-lazy reveal" data-map-src={site.mapEmbed}>
             <button type="button" class="map-lazy__btn" id="loadMapBtn">Load map</button>
-            <iframe class="map-embed" title="Metavera office location" loading="lazy" hidden></iframe>
+            <iframe class="map-embed" title="Metavera Head Office location" loading="lazy" hidden></iframe>
           </div>
         </div>
 
@@ -139,7 +144,7 @@ const socialLinks = [
               </div>
               <div class="form-group">
                 <label class="form-label" for="ct-phone">Phone Number</label>
-                <input type="tel" id="ct-phone" name="phone" class="form-input" placeholder="+234 ..." />
+                <input type="tel" id="ct-phone" name="phone" class="form-input" placeholder="e.g. 0803 316 7061" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="ct-subject">Subject</label>

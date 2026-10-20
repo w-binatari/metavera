@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
+import { site } from '../../lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
@@ -17,7 +18,7 @@ const filters = [
 ---
 
 <BaseLayout
-  title="Projects — Metavera Ltd | Premium Nigerian Real Estate"
+  title={`Projects — ${site.name} | Premium Nigerian Real Estate`}
   description="Browse Metavera's portfolio of residential, commercial, and land projects across Nigeria. Filter by type, status, and location."
   navSolid
   activeNav="projects"
