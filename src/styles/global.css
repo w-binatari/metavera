@@ -615,8 +615,8 @@ h1, h2, h3, h4 { font-family: var(--font-serif); line-height: 1.15; font-weight:
 .values-grid--ten { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .value-card { padding: 36px 28px; border-radius: 8px; background: var(--clr-white); border-top: 4px solid transparent; transition: border-color 0.3s, transform 0.3s var(--ease); }
 .value-card:hover { border-color: var(--clr-gold); transform: translateY(-4px); }
-.value-card__num { font-family: var(--font-serif); font-size: 48px; font-weight: 700; color: var(--clr-green); opacity: 0.12; line-height: 1; margin-bottom: -16px; }
-.value-card__title { font-family: var(--font-serif); font-size: 22px; margin-bottom: 12px; }
+.value-card__num { font-family: var(--font-serif); font-size: 40px; font-weight: 700; color: var(--clr-green); opacity: 0.2; line-height: 1; margin-bottom: 12px; }
+.value-card__title { font-family: var(--font-serif); font-size: 22px; margin-bottom: 12px; position: relative; z-index: 1; }
 .value-card__text { font-size: 15px; color: var(--clr-muted); line-height: 1.75; }
 
 /* ---- Contact Page ---- */
