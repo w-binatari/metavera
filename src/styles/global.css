@@ -299,6 +299,22 @@ h1, h2, h3, h4 { font-family: var(--font-serif); line-height: 1.15; font-weight:
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   opacity: 0; animation: fadeUp 0.9s 0.8s var(--ease) forwards;
 }
+.hero__social-icon {
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
+}
+.hero__social-icon:hover {
+  background: var(--clr-gold);
+  border-color: var(--clr-gold);
+  color: var(--clr-white);
+  transform: translateY(-2px);
+}
 .hero__social-pill {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; border-radius: 100px;
@@ -314,6 +330,8 @@ h1, h2, h3, h4 { font-family: var(--font-serif); line-height: 1.15; font-weight:
   border-color: var(--clr-gold);
   color: var(--clr-white);
 }
+.social-icon { display: block; flex-shrink: 0; }
+.btn--social { gap: 10px; }
 .hero__card {
   background: rgba(255, 255, 255, 0.97);
   border-radius: 12px;

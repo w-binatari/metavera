@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import StatsBar from '../components/StatsBar.astro';
+import SocialIcon from '../components/SocialIcon.astro';
 import { getCollection } from 'astro:content';
 import { site, whatsappUrl } from '../lib/site';
 
@@ -35,7 +36,7 @@ const formEndpoint = site.formEndpoint || '#';
           src="/images/metavera_hero-1280.jpg"
           srcset="/images/metavera_hero-800.jpg 800w, /images/metavera_hero-1280.jpg 1280w, /images/metavera_hero-1920.jpg 1920w"
           sizes="100vw"
-          alt="Modern urban Nigerian city skyline at dusk"
+          alt="Modern urban African city skyline at golden hour"
           width="1280"
           height="720"
           fetchpriority="high"
@@ -60,11 +61,11 @@ const formEndpoint = site.formEndpoint || '#';
           </a>
         </div>
         <div class="hero__social-links">
-          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" class="hero__social-pill">
-            Instagram
+          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" class="hero__social-icon" aria-label="Follow Metavera on Instagram">
+            <SocialIcon name="instagram" size={22} />
           </a>
-          <a href={site.social.tiktok} target="_blank" rel="noopener noreferrer" class="hero__social-pill">
-            TikTok
+          <a href={site.social.tiktok} target="_blank" rel="noopener noreferrer" class="hero__social-icon" aria-label="Follow Metavera on TikTok">
+            <SocialIcon name="tiktok" size={22} />
           </a>
           <a href="/projects" class="hero__social-pill">
             Browse Properties

@@ -1,16 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import SocialIcon from '../components/SocialIcon.astro';
 import { getCollection } from 'astro:content';
 import { site, whatsappUrl } from '../lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const formEndpoint = site.formEndpoint || '#';
 const socialLinks = [
-  { label: 'Instagram', href: site.social.instagram },
-  { label: 'TikTok', href: site.social.tiktok },
-  { label: 'Facebook', href: site.social.facebook },
-  { label: 'Twitter / X', href: site.social.twitter },
+  { key: 'instagram' as const, label: 'Instagram', href: site.social.instagram },
+  { key: 'tiktok' as const, label: 'TikTok', href: site.social.tiktok },
 ].filter((s) => s.href);
 ---
 
@@ -187,8 +186,9 @@ const socialLinks = [
       <div class="social-cta-row">
         {
           socialLinks.map((s) => (
-            <a href={s.href} class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-              {s.label}
+            <a href={s.href} class="btn btn--outline btn--social" target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+              <SocialIcon name={s.key} size={18} />
+              <span>{s.label}</span>
             </a>
           ))
         }

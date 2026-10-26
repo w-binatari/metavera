@@ -1,13 +1,11 @@
 ---
 import { site } from '../lib/site';
+import SocialIcon from './SocialIcon.astro';
 
 const year = new Date().getFullYear();
 const social = [
-  { key: 'instagram', label: 'Instagram', short: 'IG', href: site.social.instagram },
-  { key: 'tiktok', label: 'TikTok', short: 'TT', href: site.social.tiktok },
-  { key: 'twitter', label: 'Twitter/X', short: 'X', href: site.social.twitter },
-  { key: 'linkedin', label: 'LinkedIn', short: 'IN', href: site.social.linkedin },
-  { key: 'facebook', label: 'Facebook', short: 'FB', href: site.social.facebook },
+  { key: 'instagram' as const, label: 'Instagram', href: site.social.instagram },
+  { key: 'tiktok' as const, label: 'TikTok', href: site.social.tiktok },
 ].filter((s) => s.href);
 ---
 
@@ -27,7 +25,7 @@ const social = [
             <div class="footer__social">
               {social.map((s) => (
                 <a href={s.href} class="footer__social-link" aria-label={s.label} target="_blank" rel="noopener noreferrer">
-                  {s.short}
+                  <SocialIcon name={s.key} size={18} />
                 </a>
               ))}
             </div>
