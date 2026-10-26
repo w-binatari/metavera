@@ -67,8 +67,6 @@ export const site = {
     source: 'Unsplash',
     url: 'https://unsplash.com/photos/1611348524140-53c9a25263d6',
   },
-  /** Set PUBLIC_FORM_ENDPOINT in .env for Formspree / Web3Forms / custom API */
-  formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT ?? '',
   stats: [
     { value: 38, suffix: '', label: 'Projects Delivered' },
     { value: 1200, suffix: '', label: 'Happy Clients' },

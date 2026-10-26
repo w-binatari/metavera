@@ -19,7 +19,6 @@ function openMobileNav() {
   mobileNav.classList.add('open');
   mobileNav.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
   const closeBtn = document.getElementById('mobileNavClose');
   closeBtn?.focus();
 }
@@ -123,43 +122,70 @@ function showToast(msg) {
   }, 4000);
 }
 
-async function submitForm(form) {
-  const endpoint = form.dataset.endpoint || form.getAttribute('action') || '';
+const LABEL_MAP = {
+  formType: 'Request',
+  name: 'Name',
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  phone: 'Phone',
+  email: 'Email',
+  interest: 'Interest',
+  subject: 'Subject',
+  property: 'Property',
+  project: 'Project',
+  unitType: 'Unit Type',
+  estate: 'Estate',
+  date: 'Preferred Date',
+  message: 'Message',
+};
+
+function formatFormType(value) {
+  const map = {
+    contact: 'Contact Inquiry',
+    inspection: 'Site Inspection Booking',
+    interest: 'Property Interest',
+    'hero-reachout': 'Callback Request',
+  };
+  return map[value] || value;
+}
+
+function buildWhatsAppMessage(payload) {
+  const lines = ['Hello Metavera,', '', 'I just submitted a request from your website:', ''];
+
+  Object.entries(payload).forEach(([key, value]) => {
+    if (!value || String(value).trim() === '') return;
+    const label = LABEL_MAP[key] || key;
+    const display = key === 'formType' ? formatFormType(String(value)) : String(value);
+    lines.push(`${label}: ${display}`);
+  });
+
+  lines.push('', 'Please get back to me. Thank you.');
+  return lines.join('\n');
+}
+
+function submitForm(form) {
   const submitBtn = form.querySelector('[type="submit"]');
   const originalText = submitBtn?.textContent;
   if (submitBtn) {
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
+    submitBtn.textContent = 'Opening WhatsApp...';
   }
 
   const formData = new FormData(form);
   const payload = Object.fromEntries(formData.entries());
+  const whatsapp =
+    form.dataset.whatsapp ||
+    document.body.dataset.whatsapp ||
+    '2348033167061';
+  const message = buildWhatsAppMessage(payload);
+  const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
 
   try {
-    if (endpoint && endpoint !== '#') {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error('Submit failed');
-    } else {
-      await new Promise((r) => setTimeout(r, 800));
-    }
-
+    window.open(url, '_blank', 'noopener,noreferrer');
     form.reset();
-    const formId = form.id;
-    if (formId === 'inspectionForm') {
-      showToast("Inspection request received! We'll be in touch within 24 hours.");
-    } else if (formId === 'interestForm') {
-      showToast('Interest submitted! Our team will reach out shortly.');
-    } else if (formId === 'heroLeadForm') {
-      showToast("Callback request received! An advisor will reach out shortly.");
-    } else {
-      showToast("Message sent successfully! We'll respond within 24 hours.");
-    }
+    showToast('Opening WhatsApp with your message. Send it there to reach our team.');
   } catch {
-    showToast('Something went wrong. Please try WhatsApp or email us directly.');
+    showToast('Could not open WhatsApp. Please call or message us directly.');
   } finally {
     if (submitBtn) {
       submitBtn.disabled = false;

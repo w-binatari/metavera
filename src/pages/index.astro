@@ -9,7 +9,6 @@ import { site, whatsappUrl } from '../lib/site';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const featured = projects.filter((p) => p.data.featured).slice(0, 3);
 const testimonials = (await getCollection('testimonials')).sort((a, b) => a.data.order - b.data.order);
-const formEndpoint = site.formEndpoint || '#';
 ---
 
 <BaseLayout
@@ -76,7 +75,7 @@ const formEndpoint = site.formEndpoint || '#';
       <div class="hero__card">
         <h2 class="hero__card-title">Reach Out Today</h2>
         <p class="hero__card-desc">Speak with a property advisor or book a free site inspection in Abuja or Port Harcourt.</p>
-        <form class="form hero__form" id="heroLeadForm" data-lead-form data-endpoint={formEndpoint} action={formEndpoint} method="POST">
+        <form class="form hero__form" id="heroLeadForm" data-lead-form data-whatsapp={site.whatsapp}>
           <input type="hidden" name="formType" value="hero-reachout" />
           <div class="form-group">
             <label class="form-label" for="hero-name">Full Name *</label>
@@ -102,7 +101,7 @@ const formEndpoint = site.formEndpoint || '#';
               <option value="Speak with an Advisor">Speak with an Advisor</option>
             </select>
           </div>
-          <button type="submit" class="btn btn--primary form-submit form-submit--full">Request a Callback →</button>
+          <button type="submit" class="btn btn--whatsapp form-submit form-submit--full">Send via WhatsApp →</button>
         </form>
       </div>
     </div>
@@ -260,7 +259,7 @@ const formEndpoint = site.formEndpoint || '#';
           </div>
         </div>
         <div class="reveal reveal-delay-2">
-          <form class="form" id="inspectionForm" data-lead-form data-endpoint={formEndpoint} action={formEndpoint} method="POST">
+          <form class="form" id="inspectionForm" data-lead-form data-whatsapp={site.whatsapp}>
             <input type="hidden" name="formType" value="inspection" />
             <div class="form-row">
               <div class="form-group">
@@ -290,7 +289,7 @@ const formEndpoint = site.formEndpoint || '#';
                 <input type="date" id="insp-date" name="date" class="form-input" />
               </div>
             </div>
-            <button type="submit" class="btn btn--primary form-submit">Book My Inspection →</button>
+            <button type="submit" class="btn btn--whatsapp form-submit">Book via WhatsApp →</button>
           </form>
         </div>
       </div>

@@ -17,7 +17,6 @@ const { project } = Astro.props;
 const { data } = project;
 const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const related = all.filter((p) => p.id !== project.id).slice(0, 3);
-const formEndpoint = site.formEndpoint || '#';
 const gallery = data.gallery.length ? data.gallery : [data.image];
 const mapSrc = data.mapEmbed || site.mapEmbed;
 const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--type';
@@ -128,9 +127,9 @@ const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--typ
           <div class="interest-card reveal">
             <h3 class="interest-card__title">Secure Your Unit</h3>
             <p class="interest-card__desc">
-              Fill in your details and our team will reach out within 24 hours with pricing, floor plans, and availability.
+              Fill in your details and we will open WhatsApp with your interest message ready to send to our team.
             </p>
-            <form class="form" id="interestForm" data-lead-form data-endpoint={formEndpoint} action={formEndpoint} method="POST">
+            <form class="form" id="interestForm" data-lead-form data-whatsapp={site.whatsapp}>
               <input type="hidden" name="formType" value="interest" />
               <input type="hidden" name="project" value={data.title} />
               <div class="form-group">
@@ -162,7 +161,7 @@ const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--typ
                 <textarea id="int-msg" name="message" class="form-textarea form-textarea--sm" placeholder="Payment preference, timeline, questions..."
                 ></textarea>
               </div>
-              <button type="submit" class="btn btn--primary form-submit form-submit--full">Submit Interest →</button>
+              <button type="submit" class="btn btn--whatsapp form-submit form-submit--full">Send via WhatsApp →</button>
             </form>
             <div class="interest-card__call">
               <p>Or speak to us directly</p>

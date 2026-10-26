@@ -6,7 +6,6 @@ import { getCollection } from 'astro:content';
 import { site, whatsappUrl } from '../lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const formEndpoint = site.formEndpoint || '#';
 const socialLinks = [
   { key: 'instagram' as const, label: 'Instagram', href: site.social.instagram },
   { key: 'tiktok' as const, label: 'TikTok', href: site.social.tiktok },
@@ -121,9 +120,9 @@ const socialLinks = [
         <div class="reveal reveal-delay-2">
           <div class="contact-form-card">
             <h3 class="contact-form-card__title">How Can We Help?</h3>
-            <p class="contact-form-card__desc">Fill in your details and our team will respond within 24 hours.</p>
+            <p class="contact-form-card__desc">Fill in your details and we will open WhatsApp with your message ready to send.</p>
 
-            <form class="form" id="contactForm" data-lead-form data-endpoint={formEndpoint} action={formEndpoint} method="POST">
+            <form class="form" id="contactForm" data-lead-form data-whatsapp={site.whatsapp}>
               <input type="hidden" name="formType" value="contact" />
               <div class="form-row">
                 <div class="form-group">
@@ -171,7 +170,7 @@ const socialLinks = [
                   placeholder="Tell us more about what you're looking for..."
                   required></textarea>
               </div>
-              <button type="submit" class="btn btn--dark form-submit">Send Message →</button>
+              <button type="submit" class="btn btn--whatsapp form-submit">Send via WhatsApp →</button>
             </form>
           </div>
         </div>
