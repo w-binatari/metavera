@@ -13,8 +13,8 @@ image: /images/greenview.jpg
 gallery:
   - /images/greenview.jpg
   - /images/mtv4.jpg
-excerpt: Completed residential terrace homes in Jabi — sold out.
-description: Greenview Terrace is a completed Metavera residential project in Jabi, Abuja. The development delivered modern terrace homes with verified titles and professional facilities management. This listing is retained as a portfolio reference — units are sold out.
+excerpt: Completed residential terrace homes in Jabi (sold out).
+description: Greenview Terrace is a completed Metavera residential project in Jabi, Abuja. The development delivered modern terrace homes with verified titles and professional facilities management. This listing is retained as a portfolio reference as all units are sold out.
 specs:
   - { label: Type, value: Residential Terraces }
   - { label: Status, value: Sold Out }
@@ -25,6 +25,6 @@ amenities:
   - Parking
   - Backup Power
 unitOptions: []
-seoTitle: Greenview Terrace — Metavera Investment Limited
-seoDescription: Greenview Terrace in Jabi, Abuja — a completed Metavera residential project (sold out).
+seoTitle: Greenview Terrace | Metavera Investment Limited
+seoDescription: Greenview Terrace in Jabi, Abuja is a completed Metavera residential project (sold out).
 ---

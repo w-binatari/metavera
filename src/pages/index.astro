@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import StatsBar from '../components/StatsBar.astro';
 import { getCollection } from 'astro:content';
-import { site } from '../lib/site';
+import { site, whatsappUrl } from '../lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const featured = projects.filter((p) => p.data.featured).slice(0, 3);
@@ -12,13 +12,13 @@ const formEndpoint = site.formEndpoint || '#';
 ---
 
 <BaseLayout
-  title={`${site.name} — ${site.tagline}`}
+  title={`${site.name} | ${site.tagline}`}
   activeNav="home"
   preloadImage="/images/metavera_hero-1280.webp"
   preloadImageType="image/webp"
   ogImage="/images/metavera_hero-1280.jpg"
 >
-  <section class="hero" id="hero">
+  <section class="hero hero--conversion" id="hero">
     <div class="hero__bg">
       <picture>
         <source
@@ -35,9 +35,9 @@ const formEndpoint = site.formEndpoint || '#';
           src="/images/metavera_hero-1280.jpg"
           srcset="/images/metavera_hero-800.jpg 800w, /images/metavera_hero-1280.jpg 1280w, /images/metavera_hero-1920.jpg 1920w"
           sizes="100vw"
-          alt="Modern Nigerian real estate skyline"
+          alt="Modern urban Nigerian city skyline at dusk"
           width="1280"
-          height="853"
+          height="720"
           fetchpriority="high"
           decoding="async"
           loading="eager"
@@ -45,15 +45,64 @@ const formEndpoint = site.formEndpoint || '#';
       </picture>
     </div>
     <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <p class="hero__eyebrow">Premium Real Estate · Nigeria</p>
-      <h1 class="hero__headline">Your Dream Property, <em>Delivered.</em></h1>
-      <p class="hero__sub">
-        {site.mission}
-      </p>
-      <div class="hero__ctas">
-        <a href="/projects" class="btn btn--primary">Explore Properties</a>
-        <a href="/contact" class="btn btn--outline">Book an Inspection</a>
+    <div class="hero__content hero__content--split">
+      <div class="hero__copy">
+        <h1 class="hero__headline">Your Dream Property, <em>Delivered.</em></h1>
+        <p class="hero__sub">
+          {site.mission}
+        </p>
+        <div class="hero__ctas">
+          <a href={whatsappUrl("Hello Metavera, I'd like to speak with an advisor about your properties.")} class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">
+            Chat on WhatsApp
+          </a>
+          <a href={`tel:${site.phoneTel}`} class="btn btn--outline">
+            Call {site.phoneDisplay}
+          </a>
+        </div>
+        <div class="hero__social-links">
+          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" class="hero__social-pill">
+            Instagram
+          </a>
+          <a href={site.social.tiktok} target="_blank" rel="noopener noreferrer" class="hero__social-pill">
+            TikTok
+          </a>
+          <a href="/projects" class="hero__social-pill">
+            Browse Properties
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__card">
+        <h2 class="hero__card-title">Reach Out Today</h2>
+        <p class="hero__card-desc">Speak with a property advisor or book a free site inspection in Abuja or Port Harcourt.</p>
+        <form class="form hero__form" id="heroLeadForm" data-lead-form data-endpoint={formEndpoint} action={formEndpoint} method="POST">
+          <input type="hidden" name="formType" value="hero-reachout" />
+          <div class="form-group">
+            <label class="form-label" for="hero-name">Full Name *</label>
+            <input type="text" id="hero-name" name="name" class="form-input" placeholder="Your full name" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="hero-phone">Phone / WhatsApp *</label>
+              <input type="tel" id="hero-phone" name="phone" class="form-input" placeholder="0803 316 7061" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="hero-email">Email Address</label>
+              <input type="email" id="hero-email" name="email" class="form-input" placeholder="your@email.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="hero-interest">How Can We Help?</label>
+            <select id="hero-interest" name="interest" class="form-select">
+              <option value="Book a Free Site Inspection">Book a Free Site Inspection</option>
+              <option value="Buy Residential Property">Buy Residential Property</option>
+              <option value="Buy Land / Investment Plot">Buy Land / Investment Plot</option>
+              <option value="Commercial Property Inquiry">Commercial Property Inquiry</option>
+              <option value="Speak with an Advisor">Speak with an Advisor</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn--primary form-submit form-submit--full">Request a Callback →</button>
+        </form>
       </div>
     </div>
   </section>
@@ -63,11 +112,10 @@ const formEndpoint = site.formEndpoint || '#';
   <section class="section" id="featured-projects">
     <div class="container">
       <div class="section-header reveal">
-        <p class="section-header__eyebrow">Our Portfolio</p>
         <h2 class="section-header__title">Featured Projects</h2>
         <div class="divider"></div>
         <p class="section-header__desc">
-          From elegant apartments to gated estates — every Metavera project is a statement of quality and intention.
+          From elegant apartments to gated estates, every Metavera project is a statement of quality and intention.
         </p>
       </div>
       <div class="projects-grid">
@@ -97,7 +145,6 @@ const formEndpoint = site.formEndpoint || '#';
     <div class="container">
       <div class="about-snippet__grid">
         <div class="reveal">
-          <p class="about-snippet__tag">Who We Are</p>
           <h2 class="about-snippet__heading">Redefining Modern Urban Living Across West Africa</h2>
           <div class="divider"></div>
           <p class="body-lg text-muted about-snippet__p">
@@ -128,7 +175,6 @@ const formEndpoint = site.formEndpoint || '#';
   <section class="section why" id="why-choose-us">
     <div class="container">
       <div class="section-header text-center section-header--center reveal">
-        <p class="section-header__eyebrow">Why Metavera</p>
         <h2 class="section-header__title">Built on Principles That Matter</h2>
         <div class="divider divider--center"></div>
       </div>
@@ -163,7 +209,7 @@ const formEndpoint = site.formEndpoint || '#';
           </div>
           <h3 class="why__card-title">Secure Investment</h3>
           <p class="why__card-text">
-            All Metavera properties come with clear statutory titles — C of O, Governor's Consent, FCTDA Approval — protecting your
+            All Metavera properties come with clear statutory titles (C of O, Governor's Consent, and FCTDA Approval) protecting your
             investment completely.
           </p>
         </div>
@@ -177,7 +223,7 @@ const formEndpoint = site.formEndpoint || '#';
           </div>
           <h3 class="why__card-title">Dedicated Support</h3>
           <p class="why__card-text">
-            From your first inquiry to after key handover — our team provides responsive, personalised guidance every step of the way.
+            From your first inquiry to after key handover, our team provides responsive, personalised guidance every step of the way.
           </p>
         </div>
       </div>
@@ -188,7 +234,6 @@ const formEndpoint = site.formEndpoint || '#';
     <div class="container">
       <div class="inspection__grid">
         <div class="reveal">
-          <p class="inspection__eyebrow">Take the First Step</p>
           <h2 class="inspection__title">Schedule a Free Site Inspection</h2>
           <p class="inspection__desc">
             Come see your future property with your own eyes. Our team will guide you through every unit, answer every question, and
@@ -223,7 +268,7 @@ const formEndpoint = site.formEndpoint || '#';
               </div>
               <div class="form-group">
                 <label class="form-label form-label--white" for="insp-phone">Phone Number</label>
-                <input type="tel" id="insp-phone" name="phone" class="form-input" placeholder="e.g. 0801 234 5678" required />
+                <input type="tel" id="insp-phone" name="phone" class="form-input" placeholder="e.g. 0803 316 7061" required />
               </div>
             </div>
             <div class="form-group">
@@ -254,7 +299,6 @@ const formEndpoint = site.formEndpoint || '#';
   <section class="section testimonials" id="testimonials">
     <div class="container">
       <div class="section-header text-center section-header--center reveal">
-        <p class="section-header__eyebrow">Client Stories</p>
         <h2 class="section-header__title">Trusted by Nigerians, Proven by Results</h2>
         <div class="divider divider--center"></div>
       </div>

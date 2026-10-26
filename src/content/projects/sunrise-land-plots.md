@@ -14,7 +14,7 @@ gallery:
   - /images/mtv4.jpg
   - /images/mtv2.jpg
 excerpt: Serviced land plots in Epe for residential and investment buyers.
-description: Sunrise Land Plots offers serviced parcels in Epe, Lagos — positioned for residential development and long-term land banking. Plots come with clear documentation guidance and site access for inspection.
+description: Sunrise Land Plots offers serviced parcels in Epe, Lagos, positioned for residential development and long-term land banking. Plots come with clear documentation guidance and site access for inspection.
 specs:
   - { label: Type, value: Serviced Land }
   - { label: Status, value: Available }
@@ -28,7 +28,7 @@ amenities:
 unitOptions:
   - Single Plot
   - Multiple Plots
-  - Not Sure — Advise Me
-seoTitle: Sunrise Land Plots — Metavera Investment Limited
-seoDescription: Sunrise Land Plots in Epe, Lagos — serviced plots from ₦12,000,000. Book a site inspection with Metavera.
+  - Not Sure (Advise Me)
+seoTitle: Sunrise Land Plots | Metavera Investment Limited
+seoDescription: Sunrise Land Plots in Epe, Lagos offers serviced plots from ₦12,000,000. Book a site inspection with Metavera.
 ---

@@ -49,11 +49,12 @@ export const site = {
     { num: '10', title: 'Investor Alignment', text: 'Structuring sustainable land and housing assets in strategic growth corridors for long-term wealth creation.' },
   ],
   hours: {
-    weekdays: 'Mon – Fri: 8:00am – 6:00pm',
-    saturday: 'Saturday: 9:00am – 3:00pm',
+    weekdays: 'Mon to Fri: 8:00am to 6:00pm',
+    saturday: 'Saturday: 9:00am to 3:00pm',
   },
   social: {
-    instagram: '',
+    instagram: 'https://www.instagram.com/metavera_investment1',
+    tiktok: 'https://vt.tiktok.com/ZSgmBF2vW/',
     twitter: '',
     linkedin: '',
     facebook: '',

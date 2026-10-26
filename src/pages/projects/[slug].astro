@@ -24,7 +24,7 @@ const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--typ
 ---
 
 <BaseLayout
-  title={data.seoTitle || `${data.title} — ${site.name}`}
+  title={data.seoTitle || `${data.title} | ${site.name}`}
   description={data.seoDescription || data.excerpt}
   ogImage={data.image}
   navSolid
@@ -126,7 +126,6 @@ const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--typ
 
         <div>
           <div class="interest-card reveal">
-            <p class="interest-card__eyebrow">Express Interest</p>
             <h3 class="interest-card__title">Secure Your Unit</h3>
             <p class="interest-card__desc">
               Fill in your details and our team will reach out within 24 hours with pricing, floor plans, and availability.
@@ -180,7 +179,6 @@ const typeBadge = data.type === 'land' ? 'badge badge--land' : 'badge badge--typ
       <section class="section section--muted" id="more-projects">
         <div class="container">
           <div class="section-header text-center section-header--center reveal">
-            <p class="section-header__eyebrow">More From Metavera</p>
             <h2 class="section-header__title">Other Projects You May Like</h2>
             <div class="divider divider--center"></div>
           </div>

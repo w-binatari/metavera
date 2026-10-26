@@ -32,7 +32,7 @@ amenities:
 unitOptions:
   - 3-Bedroom
   - 4-Bedroom
-  - Not Sure — Advise Me
-seoTitle: Oasis Gardens Estate — Metavera Investment Limited
-seoDescription: Oasis Gardens Estate in Maitama, Abuja — gated residences under construction with flexible payment plans.
+  - Not Sure (Advise Me)
+seoTitle: Oasis Gardens Estate | Metavera Investment Limited
+seoDescription: Oasis Gardens Estate in Maitama, Abuja features gated residences under construction with flexible payment plans.
 ---

@@ -3,10 +3,11 @@ import { site } from '../lib/site';
 
 const year = new Date().getFullYear();
 const social = [
-  { key: 'instagram', label: 'Instagram', href: site.social.instagram },
-  { key: 'twitter', label: 'Twitter/X', href: site.social.twitter },
-  { key: 'linkedin', label: 'LinkedIn', href: site.social.linkedin },
-  { key: 'facebook', label: 'Facebook', href: site.social.facebook },
+  { key: 'instagram', label: 'Instagram', short: 'IG', href: site.social.instagram },
+  { key: 'tiktok', label: 'TikTok', short: 'TT', href: site.social.tiktok },
+  { key: 'twitter', label: 'Twitter/X', short: 'X', href: site.social.twitter },
+  { key: 'linkedin', label: 'LinkedIn', short: 'IN', href: site.social.linkedin },
+  { key: 'facebook', label: 'Facebook', short: 'FB', href: site.social.facebook },
 ].filter((s) => s.href);
 ---
 
@@ -26,7 +27,7 @@ const social = [
             <div class="footer__social">
               {social.map((s) => (
                 <a href={s.href} class="footer__social-link" aria-label={s.label} target="_blank" rel="noopener noreferrer">
-                  {s.label.slice(0, 1)}
+                  {s.short}
                 </a>
               ))}
             </div>

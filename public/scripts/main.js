@@ -153,6 +153,8 @@ async function submitForm(form) {
       showToast("Inspection request received! We'll be in touch within 24 hours.");
     } else if (formId === 'interestForm') {
       showToast('Interest submitted! Our team will reach out shortly.');
+    } else if (formId === 'heroLeadForm') {
+      showToast("Callback request received! An advisor will reach out shortly.");
     } else {
       showToast("Message sent successfully! We'll respond within 24 hours.");
     }

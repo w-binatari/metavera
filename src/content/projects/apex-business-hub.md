@@ -31,7 +31,7 @@ amenities:
 unitOptions:
   - Open Plan Suite
   - Fitted Office
-  - Not Sure — Advise Me
-seoTitle: Apex Business Hub — Metavera Investment Limited
-seoDescription: Apex Business Hub on Victoria Island, Lagos — commercial suites available now. Contact Metavera for pricing.
+  - Not Sure (Advise Me)
+seoTitle: Apex Business Hub | Metavera Investment Limited
+seoDescription: Apex Business Hub on Victoria Island, Lagos has commercial suites available now. Contact Metavera for pricing.
 ---
